@@ -11,6 +11,9 @@ import java.io.IOException;
 public class JoinForm implements Action {
     @Override
     public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        return null;
+        ActionForward forward = new ActionForward();
+        forward.setRedirect(false);
+        forward.setPath("jsp/joinForm.jsp");
+        return forward;
     }
 }
