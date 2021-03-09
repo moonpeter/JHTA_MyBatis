@@ -52,7 +52,18 @@ public class FrontController extends javax.servlet.http.HttpServlet{
             case "/updatePro.net":
                 action = new UpdatePro();
                 break;
-
+            case "/term.net":
+                action = new Term();
+                break;
+            case "/term2.net":
+                action = new Term2();
+                break;
+            case "/term3.net":
+                action = new Term3();
+                break;
+            case "/join.net":
+                action = new Join_name();
+                break;
         }
         forward = action.execute(request, response);
 

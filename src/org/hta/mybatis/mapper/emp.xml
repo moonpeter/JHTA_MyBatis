@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.hta.mybatis.mapper">
+    <select id="termList" resultType="emp" parameterType="java.util.Map">
+        select * from emp where hiredate between #{start} and #{end}
+    </select>
+
+    <select id="termList2" resultType="emp" parameterType="map">
+        select * from emp
+        <where>
+            <if test='start!="" and end!=""'>
+                hiredate between #{start} and #{end}
+            </if>
+        </where>
+    </select>
+
+    <select id="termList3" resultType="emp" parameterType="map">
+        select * from emp
+        <where>
+            <if test='start!="" and end!=""'>
+                hiredate between #{start} and #{end}
+            </if>
+            <if test='deptno=""'>
+                and deptno=#{deptno}
+            </if>
+        </where>
+    </select>
+
+    <select id="join" resultType="joinResultMap" parameterType="String">
+        select * from deptno natural join emp
+        where ename = #{ename}
+    </select>
+    <resultMap id="joinResultMap" type="org.hta.member.domain.Join">
+        <association property="emp" resultMap="empResultMap" />
+        <association property="dept" resultMap="deptResultMap" />
+    </resultMap>
+    <resultMap id="empResultMap" type="emp">
+        <id property="empno" column="empno" />
+        <result property="ename" column="ename" />
+        <result property="job" column="job" />
+        <result property="mgr" column="mgr" />
+        <result property="sal" column="sal" />
+        <result property="deptno" column="deptno" />
+        <result property="hiredate" column="hiredate" />
+        <result property="comm" column="comm" />
+        <result property="deptno" column="deptno" />
+    </resultMap>
+    <resultMap id="deptResultMap" type="org.hta.member.domain.Dept">
+        <id property="deptno" column="deptno" />
+        <result property="dname" column="dname"/>
+        <result property="loc" column="loc"/>
+    </resultMap>
+</mapper>

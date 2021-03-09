@@ -31,4 +31,20 @@
         where id = #{id}
     </delete>
 
+    <select id="deptnocheck" resultType="emp" parameterType="map">
+        select * from emp
+        <choose>
+            <when test="deptnos != null">
+                where deptno in
+                <foreach collection="deptnos" item="data"
+                         open="("
+                         separator=","
+                         close=")" >
+                    #{data}
+                </foreach>
+            </when>
+        </choose>
+        order by deptno
+    </select>
+
 </mapper>
